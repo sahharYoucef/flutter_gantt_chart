@@ -57,11 +57,7 @@ class _GanttChartState extends State<GanttChart> {
               height: height,
               child: Row(
                 children: <Widget>[
-                  GestureDetector(
-                    onTap : (){
-                      
-                    },
-                                      child: Container(
+                  Container(
                       height: height,
                       width: width,
                       color: Colors.blue,
@@ -78,7 +74,6 @@ class _GanttChartState extends State<GanttChart> {
                         });
                       }),
                     ),
-                  ),
                   Expanded(
                       child: SingleChildScrollView(
                     physics: NeverScrollableScrollPhysics(),
@@ -187,7 +182,16 @@ class _GanttChartState extends State<GanttChart> {
                                                 border: Border.all(
                                                     color: Colors.black54, width: 1)),
                                             child: Text('${value.taskTitle}'),
-                                          )
+                                          ),
+                                          ...List.generate(
+                                              widget.endDate.difference(value.endTask).inDays + 1,
+                                              (index) => Container(
+                                                    height: height,
+                                                    width: width,
+                                                    decoration: BoxDecoration(
+                                                      border: _border()
+                                                    ),
+                                                  )),
                                         ],
                                       )))
                                   .values
